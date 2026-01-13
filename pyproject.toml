@@ -14,7 +14,7 @@ authors = [
 ]
 keywords = ["memory", "leak", "detection", "monitoring", "profiling", "debugging"]
 classifiers = [
-    "Development Status :: 3 - Alpha",
+    "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
@@ -23,11 +23,11 @@ classifiers = [
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Topic :: System :: Monitoring",
     "Topic :: Software Development :: Debuggers",
 ]
-
 dependencies = [
     "psutil>=5.8.0",
 ]
@@ -49,7 +49,6 @@ fastapi = [
 
 [project.urls]
 Homepage = "https://github.com/yeakiniqra/memwatcher"
-Documentation = "https://memwatcher.readthedocs.io"
 Repository = "https://github.com/yeakiniqra/memwatcher"
 Issues = "https://github.com/yeakiniqra/memwatcher/issues"
 
@@ -68,7 +67,7 @@ addopts = [
 
 [tool.black]
 line-length = 88
-target-version = ['py37', 'py38', 'py39', 'py310', 'py311']
+target-version = ['py37', 'py38', 'py39', 'py310', 'py311', 'py312']
 include = '\.pyi?$'
 extend-exclude = '''
 /(
