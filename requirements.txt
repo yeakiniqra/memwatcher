@@ -1,0 +1,2 @@
+# Core dependencies
+psutil>=5.8.0
