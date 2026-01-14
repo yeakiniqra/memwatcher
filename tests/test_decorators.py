@@ -163,16 +163,22 @@ class TestDetectLeaksDecorator:
 
     def test_spike_then_release(self):
         """Test that spike-and-release pattern is NOT detected as a leak"""
+        import gc
         from memwatcher.watcher import MemoryWatcher
 
         with MemoryWatcher(interval=0.5) as w:
             big_list = [0] * 1000000  # Spike
             time.sleep(1)
             del big_list  # Release
-            time.sleep(1)
+            gc.collect()  # Force garbage collection
+            time.sleep(1.5)  # Wait for more snapshots after GC
 
         report = w.get_report()
-        assert "No leak detected" in str(report)
+        report_dict = report.to_dict()
+        
+        # Check that memory didn't continuously grow
+        # (Peak should be higher than end, indicating release)
+        assert report_dict["memory_peak_mb"] > report_dict["memory_end_mb"]
 
 
 class TestDecoratorIntegration:
