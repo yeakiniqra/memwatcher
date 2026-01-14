@@ -2,7 +2,6 @@
 Memory report generation
 """
 
-import time
 from typing import List, Dict, Any, Optional
 from .detector import LeakDetector
 
@@ -83,11 +82,16 @@ class MemoryReport:
 
         if "leak_analysis" in data:
             analysis = data["leak_analysis"]
+            status = (
+                "⚠️  LEAK DETECTED"
+                if analysis["leak_detected"]
+                else "✓ No leak detected"
+            )
             lines.extend(
                 [
                     "",
                     "Leak Detection:",
-                    f"  Status: {'⚠️  LEAK DETECTED' if analysis['leak_detected'] else '✓ No leak detected'}",
+                    f"  Status: {status}",
                 ]
             )
 
@@ -96,7 +100,8 @@ class MemoryReport:
                     [
                         f"  Severity: {analysis['severity'].upper()}",
                         f"  Confidence: {analysis['confidence']*100:.1f}%",
-                        f"  Growth Rate: {analysis['growth_rate_mb_per_min']:.3f} MB/min",
+                        f"  Growth Rate: "
+                        f"{analysis['growth_rate_mb_per_min']:.3f} MB/min",
                         f"  Total Increase: {analysis['memory_increase_mb']:.2f} MB",
                         "",
                         f"Recommendation: {analysis['recommendation']}",
@@ -107,7 +112,7 @@ class MemoryReport:
             lines.extend(
                 [
                     "",
-                    f"⚠️  WARNING: Memory threshold exceeded!",
+                    "⚠️  WARNING: Memory threshold exceeded!",
                     f"   Current: {data['memory_end_mb']:.2f} MB",
                     f"   Threshold: {self.threshold_mb:.2f} MB",
                 ]

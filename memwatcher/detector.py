@@ -85,7 +85,8 @@ class LeakDetector:
             else:
                 result["severity"] = "low"
                 result["recommendation"] = (
-                    "Info: Slow memory growth detected. May be normal for your workload."
+                    "Info: Slow memory growth detected. "
+                    "May be normal for your workload."
                 )
         else:
             result["severity"] = "none"

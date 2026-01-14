@@ -16,7 +16,10 @@ class ThresholdExceededError(MemoryWatcherError):
         self.current_mb = current_mb
         self.threshold_mb = threshold_mb
         if message is None:
-            message = f"Memory usage {current_mb:.2f}MB exceeds threshold {threshold_mb:.2f}MB"
+            message = (
+                f"Memory usage {current_mb:.2f}MB exceeds "
+                f"threshold {threshold_mb:.2f}MB"
+            )
         super().__init__(message)
 
 
