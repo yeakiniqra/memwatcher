@@ -176,7 +176,7 @@ class TestDetectLeaksDecorator:
 
         report = w.get_report()
         report_dict = report.to_dict()
-        
+
         # Check that memory didn't continuously grow
         # (Peak should be higher than end, indicating release)
         assert report_dict["memory_peak_mb"] >= report_dict["memory_end_mb"]
